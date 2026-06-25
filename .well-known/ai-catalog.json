@@ -1,1 +1,38 @@
-
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "nano-vm",
+    "documentationUrl": "https://github.com/Ale007XD/nano-vm-mcp"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:github.com:Ale007XD:nano-vm-mcp",
+      "displayName": "nano-vm-mcp",
+      "type": "application/mcp-server-card+json",
+      "description": "MCP gateway for nano-vm: FSM-governed execution of LLM agent pipelines. Each step is an explicit state transition, not an LLM routing decision. Produces ExecutionReceipt = f(Trace) — deterministic, recomputable from execution_traces without re-running the model. Self-hosted (PyPI package, stdio/SSE transport) — not a public live endpoint.",
+      "tags": ["execution-governance", "fsm", "mcp-gateway", "agent-orchestration", "deterministic"],
+      "capabilities": ["vm_step", "run_program", "get_trace", "debug_trace", "list", "get", "delete"],
+      "representativeQueries": [
+        "execute a multi-step LLM agent workflow with a replayable execution trace",
+        "suspend and resume a multi-turn agent session with persisted state",
+        "get a deterministic audit receipt for an agent's tool calls",
+        "run an FSM-governed pipeline and inspect rejected transitions"
+      ],
+      "version": "0.4.5",
+      "updatedAt": "2026-06-25",
+      "data": {
+        "name": "nano-vm-mcp",
+        "description": "Gateway for llm-nano-vm: FSM execution kernel exposed as MCP tools, SQLite-backed execution traces.",
+        "tools": [
+          {"name": "run_program", "description": "Execute a Program through the FSM kernel and persist the resulting Trace."},
+          {"name": "vm_step", "description": "Single-step channel-adapter primitive: (session_id, input) -> output, with suspend/resume via _GatewayCursorRepository."},
+          {"name": "get_trace", "description": "Retrieve a stored Trace and its projected execution_traces rows by execution_id."},
+          {"name": "debug_trace", "description": "Auto-diagnostic on FAILED traces via Agent Debugger integration (opt-in, AGENT_DEBUGGER_TOKEN)."},
+          {"name": "list", "description": "List stored programs."},
+          {"name": "get", "description": "Retrieve a stored program by id."},
+          {"name": "delete", "description": "Delete a stored program and cascade its traces."}
+        ]
+      }
+    }
+  ]
+}
